@@ -2,7 +2,7 @@
     "name": "spreadable/template",
     "description": "A composition-oriented template engine, written in PHP.",
     "license": "MIT",
-    "type": "linrary",
+    "type": "library",
     "autoload": {
         "files": [
           "src/functions.php"
