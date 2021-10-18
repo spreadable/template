@@ -1,0 +1,24 @@
+{
+    "name": "spreadable/template",
+    "description": "A composition-oriented template engine, written in PHP.",
+    "type": "linrary",
+    "autoload": {
+        "files": [
+          "src/functions.php"
+        ],
+        "psr-4": {
+            "Spreadable\\Template\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lcf.vs",
+            "email": "michael.rouges@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-dom": "*",
+        "ext-libxml": "*"
+    }
+}
