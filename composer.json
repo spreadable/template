@@ -3,6 +3,7 @@
     "description": "A composition-oriented template engine, written in PHP.",
     "license": "MIT",
     "type": "library",
+    "homepage": "https://github.com/spreadable/template",
     "autoload": {
         "files": [
           "src/functions.php"
