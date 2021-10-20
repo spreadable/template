@@ -126,9 +126,9 @@ echo $page->serialize();
 
 *Added in **1.1.0***
 
-Sometimes, it can be interesting to prefill some templates to avoid making the entire filling job during the runtime.
+Sometimes, it can be interesting to prefill some **fragments** to avoid making the entire filling job during the runtime.
 
-For that reason, you can call `->serialize(string $prefix = null)` with a **prefix** matching the first marker segment.
+For that reason, you can call `$fragment->serialize(string $prefix = null)` with a **prefix** matching the first marker segment.
 
 You can now save them as files to be able to reuse them to only fill the rest during the runtime.
 
