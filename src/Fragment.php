@@ -177,9 +177,17 @@ namespace Spreadable\Template {
             $nodes = [];
 
             foreach ($this->_markers as $marker) {
-                $name = $marker->getName();
                 $text = $marker->getText();
-                $this->_data[$name] = null;
+                $data = &$this->_data;
+
+                foreach ($marker->getSegments() as $segment) {
+                    if (!isset($data[$segment])) {
+                        $data[$segment] = null;
+                    }
+
+                    $data = &$data[$segment];
+                }
+
                 $matches = $this->_xPath->query($text, $this->_fragment);
 
                 foreach ($matches as $match) {
