@@ -147,7 +147,7 @@ namespace Spreadable\Template {
         {
             return $this->_fragment;
         }
-        
+
         private function rewrite ()
         {
             $identifiers = new WeakMap();
@@ -205,10 +205,13 @@ namespace Spreadable\Template {
         }
 
         /**
-         * @return self
+         * @param string|null $prefix
+         * @return $this
          * @throws Exception
          */
-        public function render (): self
+        public function render (
+            string $prefix = null
+        ): self
         {
             $clone = clone $this;
             $data = $clone->_data;
@@ -218,12 +221,17 @@ namespace Spreadable\Template {
             $matches = [];
 
             foreach ($markers as $marker) {
+                $segments = $marker->getSegments();
+
+                if ($prefix !== null && $segments[0] !== $prefix) {
+                    continue;
+                }
+
                 $identifier = $marker->getIdentifier();
                 $name = $marker->getName();
                 $optional = $marker->isOptional();
                 $attr = $marker->getAttr();
                 $text = $marker->getText();
-                $segments = $marker->getSegments();
                 $attrs = $xPath->query($attr, $fragment);
                 $texts = $xPath->query($text, $fragment);
                 $matches[] = [$attrs, $texts, $identifier, $name, $optional, $segments];
@@ -279,12 +287,15 @@ namespace Spreadable\Template {
         }
 
         /**
+         * @param string|null $prefix
          * @return string
          * @throws Exception
          */
-        public function serialize (): string
+        public function serialize (
+            string $prefix = null
+        ): string
         {
-            $fragment = $this->render()->_fragment;
+            $fragment = $this->render($prefix)->_fragment;
 
             return $fragment->ownerDocument->saveHTML($fragment);
         }

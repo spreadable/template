@@ -20,7 +20,6 @@ An attribute contains a unique optional marker and if the provided
 value is `null`, on the rendering, that attribute is simply removed,
 useful for boolean attributes.
 
-
 ## Basic templates
 
 ```php
@@ -122,6 +121,16 @@ echo $page->serialize();
 </html>
 */
 ```
+
+## Prefilling
+
+*Added in **1.1.0***
+
+Sometimes, it can be interesting to prefill some templates to avoid making the entire filling job during the runtime.
+
+For that reason, you can call `->serialize(string $prefix = null)` with a **prefix** matching the first marker segment.
+
+You can now save them as files to be able to reuse them to only fill the rest during the runtime.
 
 ## License
 
