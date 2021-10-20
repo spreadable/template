@@ -132,6 +132,14 @@ For that reason, you can call `$fragment->serialize(string $prefix = null)` with
 
 You can now save them as files to be able to reuse them to only fill the rest during the runtime.
 
+## Mapping
+
+*Added in **1.2.0***
+
+A fragment has a `$fragment->map(array $datas, callable $callback = null)` which calls the fragment on each entry.
+
+Instead, if a `$callback` is provided, the fragment is called on the result of `$callback($datas_entry_value, $datas_entry_key, $datas)`
+
 ## License
 
 [MIT](./license)

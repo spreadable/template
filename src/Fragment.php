@@ -116,6 +116,29 @@ namespace Spreadable\Template {
         }
 
         /**
+         * @param array $datas
+         * @param callable|null $callback
+         * @return Fragment[]
+         */
+        public function map (
+            array $datas,
+            callable $callback = null
+        )
+        {
+            if (!$callback) {
+                return array_map($this, $datas);
+            }
+
+            $fragments = [];
+
+            foreach ($datas as $key => $data) {
+                $fragments[] = $this($callback($data, $key, $datas));
+            }
+
+            return $fragments;
+        }
+
+        /**
          * @return DOMDocument[]
          */
         private static function getDocuments (): array
