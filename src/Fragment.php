@@ -12,7 +12,8 @@ namespace Spreadable\Template {
     use const E_USER_WARNING;
     use const LIBXML_HTML_NODEFDTD;
     use const LIBXML_HTML_NOIMPLIED;
-    use const SORT_REGULAR;
+
+    const NORMALIZER = './*//text()[normalize-space(.)=""]';
 
     /**
      * Class Fragment
@@ -205,7 +206,7 @@ namespace Spreadable\Template {
                 }
             }
 
-            foreach (array_unique($nodes, SORT_REGULAR) as $node) {
+            foreach ($nodes as $node) {
                 $parent = $node->parentNode;
                 $document = $node->ownerDocument;
                 $texts = [$node->nodeValue];
@@ -315,6 +316,12 @@ namespace Spreadable\Template {
                         $text->nodeValue = $value;
                     }
                 }
+            }
+
+            $blanks = $this->_xPath->query(NORMALIZER, $clone->getFragment());
+
+            foreach ($blanks as $blank) {
+                $blank->parentNode->removeChild($blank);
             }
 
             return $clone;
