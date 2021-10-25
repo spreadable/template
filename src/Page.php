@@ -23,7 +23,7 @@ namespace Spreadable\Template {
         private Fragment $_head_fragment;
 
         /**
-         * @var Fragment $_body_fragment 
+         * @var Fragment $_body_fragment
          */
         private Fragment $_body_fragment;
 
@@ -59,7 +59,7 @@ namespace Spreadable\Template {
          * @return DOMDocument
          * @throws Exception
          */
-        public function render ()
+        public function render (): DOMDocument
         {
             $document = clone Factory::document();
 
@@ -89,9 +89,9 @@ namespace Spreadable\Template {
          * @return string
          * @throws Exception
          */
-        public function serialize ()
+        public function serialize (): string
         {
             return $this->render()->saveHTML();
-        }    
+        }
     }
 }

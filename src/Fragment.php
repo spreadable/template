@@ -2,6 +2,7 @@
 
 namespace Spreadable\Template {
 
+    use ArrayAccess;
     use DOMDocument;
     use DOMDocumentFragment;
     use DOMXPath;
@@ -18,7 +19,7 @@ namespace Spreadable\Template {
      * @package Lib\DOM
      */
     class Fragment
-        implements Iterator
+        implements ArrayAccess, Iterator
     {
         /**
          * @var DOMDocument[] $_documents
@@ -230,8 +231,10 @@ namespace Spreadable\Template {
                 foreach ($texts as $text) {
                     $parent->insertBefore($document->createTextNode($text), $node);
                 }
+            }
 
-                $parent->removeChild($node);
+            foreach ($nodes as $node) {
+                $node->parentNode?->removeChild($node);
             }
         }
 
@@ -369,6 +372,56 @@ namespace Spreadable\Template {
         public function valid (): bool
         {
             return $this->_position < $this->_length;
+        }
+
+        /**
+         * @param mixed $offset
+         * @return bool
+         */
+        public function offsetExists (
+            mixed $offset
+        ): bool
+        {
+            return array_key_exists($offset, $this->_data);
+        }
+
+        /**
+         * @param mixed $offset
+         * @return mixed
+         */
+        public function offsetGet (
+            mixed $offset
+        ): mixed
+        {
+            return $this->_data[$offset];
+        }
+
+        /**
+         * @param mixed $offset
+         * @param mixed $value
+         * @throws Exception
+         * @access private
+         * @ignore
+         */
+        public function offsetSet(
+            mixed $offset,
+            mixed $value
+        )
+        {
+            throw new Exception('Illegal assignment');
+        }
+
+        /**
+         * @param mixed $offset
+         * @throws Exception
+         * @access private
+         * @ignore
+         */
+        public function offsetUnset(
+            mixed $offset
+        )
+        {
+            throw new Exception('Illegal deletion');
         }
     }
 }
