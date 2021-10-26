@@ -47,32 +47,38 @@ namespace Spreadable\Template {
 
         /**
          * @param string $file
+         * @param array $data = []
          * @return Fragment
          */
         public static function fragment (
-            string $file
+            string $file,
+            array $data = []
         ): Fragment
         {
             if (!isset(self::$_sources[$file])) {
                 self::$_sources[$file] = file_get_contents($file);
             }
 
-            return self::parse(self::$_sources[$file]);
+            return self::parse(self::$_sources[$file], $data);
         }
 
         /**
          * @param string $source
+         * @param array $data = []
          * @return Fragment
          */
         public static function parse (
-            string $source
+            string $source,
+            array $data = []
         ): Fragment
         {
             if (!isset(self::$_fragments[$source])) {
                 self::$_fragments[$source] = new Fragment($source);
             }
 
-            return clone self::$_fragments[$source];
+            $fragment = self::$_fragments[$source];
+
+            return $fragment($data);
         }
 
         /**

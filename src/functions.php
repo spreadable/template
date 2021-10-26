@@ -7,13 +7,15 @@ namespace Spreadable\Template {
 
     /**
      * @param string $file
+     * @param array $data = []
      * @return Fragment
      */
     function fragment (
-        string $file
+        string $file,
+        array $data = []
     ): Fragment
     {
-        return Factory::fragment($file);
+        return Factory::fragment($file, $data);
     }
 
     /**
