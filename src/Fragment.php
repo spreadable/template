@@ -125,7 +125,7 @@ namespace Spreadable\Template {
         public function map (
             iterable $datas,
             callable $callback = null
-        )
+        ): array
         {
             if (!$callback) {
                 return array_map($this, [...$datas]);

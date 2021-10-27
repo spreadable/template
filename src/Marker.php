@@ -66,7 +66,9 @@ namespace Spreadable\Template {
          * @param string $source
          * @return Marker[]
          */
-        public static function parse (string $source): array
+        public static function parse (
+            string $source
+        ): array
         {
             $matches = [];
             $markers = [];

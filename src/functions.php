@@ -7,12 +7,12 @@ namespace Spreadable\Template {
 
     /**
      * @param string $file
-     * @param array $data = []
+     * @param iterable $data = []
      * @return Fragment
      */
     function fragment (
         string $file,
-        array $data = []
+        iterable $data = []
     ): Fragment
     {
         return Factory::fragment($file, $data);
