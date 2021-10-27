@@ -99,11 +99,11 @@ namespace Spreadable\Template {
         }
 
         /**
-         * @param array $data = []
+         * @param iterable $data = []
          * @return self
          */
         public function __invoke (
-            array $data = []
+            iterable $data = []
         ) : self
         {
             $clone = clone $this;
@@ -118,17 +118,17 @@ namespace Spreadable\Template {
         }
 
         /**
-         * @param array $datas
+         * @param iterable $datas
          * @param callable|null $callback
          * @return Fragment[]
          */
         public function map (
-            array $datas,
+            iterable $datas,
             callable $callback = null
         )
         {
             if (!$callback) {
-                return array_map($this, $datas);
+                return array_map($this, [...$datas]);
             }
 
             $fragments = [];

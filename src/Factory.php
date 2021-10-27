@@ -47,12 +47,12 @@ namespace Spreadable\Template {
 
         /**
          * @param string $file
-         * @param array $data = []
+         * @param iterable $data = []
          * @return Fragment
          */
         public static function fragment (
             string $file,
-            array $data = []
+            iterable $data = []
         ): Fragment
         {
             if (!isset(self::$_sources[$file])) {
@@ -64,12 +64,12 @@ namespace Spreadable\Template {
 
         /**
          * @param string $source
-         * @param array $data = []
+         * @param iterable $data = []
          * @return Fragment
          */
         public static function parse (
             string $source,
-            array $data = []
+            iterable $data = []
         ): Fragment
         {
             if (!isset(self::$_fragments[$source])) {
