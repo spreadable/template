@@ -254,6 +254,7 @@ namespace Spreadable\Template {
             $markers = $clone->_markers;
             $xPath = $clone->_xPath;
             $matches = [];
+            $inserted = [];
 
             foreach ($markers as $marker) {
                 $segments = $marker->getSegments();
@@ -304,11 +305,16 @@ namespace Spreadable\Template {
 
                     if (is_array($value)) {
                         foreach ($value as $item) {
-                            $node = $item instanceof self
-                                ? $item->render()->_fragment
-                                : $document->createTextNode($item);
-
-                            $parent->insertBefore($node, $text);
+                            if ($item instanceof self) {
+                                if (!in_array($item, $inserted)) {
+                                    $node = $item->render()->_fragment;
+                                    $parent->insertBefore($node, $text);
+                                    $inserted[] = $item;
+                                }
+                            } else {
+                                $node = $document->createTextNode($item);
+                                $parent->insertBefore($node, $text);
+                            }
                         }
 
                         $parent->removeChild($text);

@@ -59,7 +59,7 @@ namespace Spreadable\Template {
             $this->_name = $name;
             $this->_segments = explode('.', $name);
             $this->_attr = "./*//attribute::*[contains(., '{$identifier}')]";
-            $this->_text = "./*//text()[contains(., '{$identifier}')]";
+            $this->_text = "(./*//text()|./text())[contains(., '{$identifier}')]";
         }
 
         /**
