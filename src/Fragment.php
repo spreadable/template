@@ -209,7 +209,7 @@ namespace Spreadable\Template {
             foreach ($nodes as $node) {
                 $parent = $node->parentNode;
                 $document = $node->ownerDocument;
-                $texts = [$node->nodeValue];
+                $texts = [$node->textContent];
 
                 foreach ($identifiers->offsetGet($node) as $match) {
                     foreach ([...$texts] as $key => $text) {
@@ -286,12 +286,12 @@ namespace Spreadable\Template {
                 }
 
                 foreach ($attrs as $attr) {
-                    $current = $attr->nodeValue;
+                    $current = $attr->textContent;
 
                     if ($value === null && $current === $identifier) {
                         $attr->ownerElement->removeAttribute($attr->name);
                     } else {
-                        $attr->nodeValue = implode($value, explode($identifier, $current));
+                        $attr->textContent = implode($value, explode($identifier, $current));
                     }
                 }
 
@@ -319,7 +319,7 @@ namespace Spreadable\Template {
 
                         $parent->removeChild($text);
                     } else {
-                        $text->nodeValue = $value;
+                        $text->textContent = $value;
                     }
                 }
             }
