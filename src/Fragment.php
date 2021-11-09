@@ -100,11 +100,11 @@ namespace Spreadable\Template {
 
         /**
          * @param iterable $data = []
-         * @return self
+         * @return static
          */
         public function __invoke (
             iterable $data = []
-        ) : self
+        ): static
         {
             $clone = clone $this;
 
@@ -291,7 +291,7 @@ namespace Spreadable\Template {
                     if ($value === null && $current === $identifier) {
                         $attr->ownerElement->removeAttribute($attr->name);
                     } else {
-                        $attr->textContent = implode($value, explode($identifier, $current));
+                        $attr->value = implode("$value", explode($identifier, $current));
                     }
                 }
 
